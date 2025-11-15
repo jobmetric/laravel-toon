@@ -1,0 +1,69 @@
+{
+    "name": "jobmetric/toon",
+    "description": "Laravel integration for TOON format: encode/decode JSON data into a token-optimized notation for LLMs.",
+    "type": "library",
+    "license": "MIT",
+    "keywords": [
+        "php",
+        "laravel",
+        "jobmetric",
+        "toon",
+        "json",
+        "ai",
+        "llm",
+        "openai",
+        "chatgpt",
+        "prompt",
+        "prompt-engineering",
+        "token-optimized",
+        "data-serialization",
+        "structured-data",
+        "data-conversion"
+    ],
+    "homepage": "https://doc.jobmetric.net/package/laravel-toon",
+    "authors": [
+        {
+            "name": "Majid Mohammadian",
+            "email": "majeedmohammadian@gmail.com",
+            "homepage": "https://www.linkedin.com/in/majidmohammadian/",
+            "role": "Full Stack Developer"
+        }
+    ],
+    "require": {
+        "php": ">=8.0.1",
+        "laravel/framework": ">=9.19",
+        "jobmetric/laravel-package-core": "^1.32"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^10.5"
+    },
+    "autoload": {
+        "files": [
+            "src/helpers.php"
+        ],
+        "psr-4": {
+            "JobMetric\\Toon\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "JobMetric\\Toon\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "JobMetric\\Toon\\ToonServiceProvider"
+            ],
+            "aliases": {
+                "Toon": "JobMetric\\Toon\\Facades\\Toon"
+            }
+        }
+    },
+    "minimum-stability": "stable",
+    "support": {
+        "issues": "https://github.com/jobmetric/toon/issues",
+        "forum": "https://twitter.com/jobmetric",
+        "source": "https://github.com/jobmetric/toon"
+    }
+}
