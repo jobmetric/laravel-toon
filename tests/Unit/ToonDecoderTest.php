@@ -3,8 +3,8 @@
 namespace JobMetric\Toon\Tests\Unit;
 
 use JobMetric\Toon\Exceptions\ToonDecodeException;
-use JobMetric\Toon\Support\ToonDecoder;
-use PHPUnit\Framework\TestCase;
+use JobMetric\Toon\Tests\TestCase;
+use JobMetric\Toon\ToonManager;
 
 /**
  * Class ToonDecoderTest
@@ -24,7 +24,7 @@ class ToonDecoderTest extends TestCase
      */
     public function testDecodeScalars(): void
     {
-        $decoder = new ToonDecoder();
+        $decoder = new ToonManager();
 
         $this->assertNull($decoder->decode("null\n"));
         $this->assertTrue($decoder->decode("true\n"));
@@ -45,7 +45,7 @@ class ToonDecoderTest extends TestCase
      */
     public function testDecodeAssociativeObject(): void
     {
-        $decoder = new ToonDecoder();
+        $decoder = new ToonManager();
 
         $toon = <<<TOON
 id: 1
@@ -60,11 +60,11 @@ TOON;
         $decoded = $decoder->decode($toon);
 
         $expected = [
-            'id' => 1,
-            'name' => 'Alice',
+            'id'     => 1,
+            'name'   => 'Alice',
             'active' => true,
-            'meta' => [
-                'role' => 'admin',
+            'meta'   => [
+                'role'  => 'admin',
                 'score' => 9.5,
             ],
         ];
@@ -81,7 +81,7 @@ TOON;
      */
     public function testDecodePrimitiveArray(): void
     {
-        $decoder = new ToonDecoder();
+        $decoder = new ToonManager();
 
         $toon = "[3]: 1,2,3\n";
 
@@ -99,10 +99,10 @@ TOON;
      */
     public function testDecodeTabularArray(): void
     {
-        $decoder = new ToonDecoder();
+        $decoder = new ToonManager();
 
         $toon = <<<TOON
-[2,]{id,name,role}:
+[2]{id,name,role}:
   1,Alice,admin
   2,Bob,user
 
@@ -127,7 +127,7 @@ TOON;
      */
     public function testDecodeMixedArray(): void
     {
-        $decoder = new ToonDecoder();
+        $decoder = new ToonManager();
 
         $toon = <<<TOON
 [3]:
@@ -151,7 +151,7 @@ TOON;
      */
     public function testDecodeInvalidIndentationThrowsException(): void
     {
-        $decoder = new ToonDecoder();
+        $decoder = new ToonManager();
 
         $toon = "id:\n   name: Alice\n";
 

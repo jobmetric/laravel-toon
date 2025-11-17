@@ -3,8 +3,8 @@
 namespace JobMetric\Toon\Tests\Unit;
 
 use JobMetric\Toon\Exceptions\ToonEncodeException;
-use JobMetric\Toon\Support\ToonEncoder;
-use PHPUnit\Framework\TestCase;
+use JobMetric\Toon\Tests\TestCase;
+use JobMetric\Toon\ToonManager;
 
 /**
  * Class ToonEncoderTest
@@ -23,16 +23,16 @@ class ToonEncoderTest extends TestCase
      */
     public function testEncodeScalars(): void
     {
-        $encoder = new ToonEncoder();
+        $encoder = new ToonManager();
 
-        $this->assertSame("null\n", $encoder->encode(null));
-        $this->assertSame("true\n", $encoder->encode(true));
-        $this->assertSame("false\n", $encoder->encode(false));
-        $this->assertSame("42\n", $encoder->encode(42));
-        $this->assertSame("3.14\n", $encoder->encode(3.14));
-        $this->assertSame("\"hello world\"\n", $encoder->encode('hello world'));
-        $this->assertSame("\"123\"\n", $encoder->encode('123'));
-        $this->assertSame("\"true\"\n", $encoder->encode('true'));
+        $this->assertSame("null", $encoder->encode(null));
+        $this->assertSame("true", $encoder->encode(true));
+        $this->assertSame("false", $encoder->encode(false));
+        $this->assertSame("42", $encoder->encode(42));
+        $this->assertSame("3.14", $encoder->encode(3.14));
+        $this->assertSame("\"hello world\"", $encoder->encode('hello world'));
+        $this->assertSame("\"123\"", $encoder->encode('123'));
+        $this->assertSame("\"true\"", $encoder->encode('true'));
     }
 
     /**
@@ -44,7 +44,7 @@ class ToonEncoderTest extends TestCase
      */
     public function testEncodeAssociativeObject(): void
     {
-        $encoder = new ToonEncoder();
+        $encoder = new ToonManager();
 
         $data = [
             'id'     => 1,
@@ -65,7 +65,6 @@ active: true
 meta:
   role: admin
   score: 9.5
-
 TOON;
 
         $this->assertSame($expected, $toon);
@@ -80,13 +79,13 @@ TOON;
      */
     public function testEncodePrimitiveArray(): void
     {
-        $encoder = new ToonEncoder();
+        $encoder = new ToonManager();
 
         $data = [1, 2, 3];
 
         $toon = $encoder->encode($data);
 
-        $this->assertSame("[3]: 1,2,3\n", $toon);
+        $this->assertSame("[3]: 1,2,3", $toon);
     }
 
     /**
@@ -98,7 +97,7 @@ TOON;
      */
     public function testEncodeTabularArray(): void
     {
-        $encoder = new ToonEncoder([
+        $encoder = new ToonManager([
             'min_rows_tabular' => 2,
         ]);
 
@@ -110,10 +109,9 @@ TOON;
         $toon = $encoder->encode($data);
 
         $expected = <<<TOON
-[2,]{id,name,role}:
+[2]{id,name,role}:
   1,Alice,admin
   2,Bob,user
-
 TOON;
 
         $this->assertSame($expected, $toon);
@@ -128,7 +126,7 @@ TOON;
      */
     public function testEncodeMixedArray(): void
     {
-        $encoder = new ToonEncoder();
+        $encoder = new ToonManager();
 
         $data = [
             1,
@@ -143,7 +141,6 @@ TOON;
   - 1
   - name: Alice
   - [2]: 10,20
-
 TOON;
 
         $this->assertSame($expected, $toon);
@@ -156,7 +153,7 @@ TOON;
      */
     public function testEncodeUnsupportedTypeThrowsException(): void
     {
-        $encoder = new ToonEncoder();
+        $encoder = new ToonManager();
 
         $this->expectException(ToonEncodeException::class);
 
