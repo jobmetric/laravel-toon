@@ -2,6 +2,7 @@
 
 namespace JobMetric\Toon;
 
+use JobMetric\PackageCore\Enums\RegisterClassTypeEnum;
 use JobMetric\PackageCore\Exceptions\RegisterClassTypeNotFoundException;
 use JobMetric\PackageCore\PackageCore;
 use JobMetric\PackageCore\PackageCoreServiceProvider;
@@ -18,6 +19,6 @@ class ToonServiceProvider extends PackageCoreServiceProvider
     {
         $package->name('laravel-toon')
             ->hasConfig()
-            ->registerClass('Toon', ToonManager::class);
+            ->registerClass('Toon', ToonManager::class, RegisterClassTypeEnum::SINGLETON());
     }
 }

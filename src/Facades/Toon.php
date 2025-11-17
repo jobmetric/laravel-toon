@@ -3,7 +3,6 @@
 namespace JobMetric\Toon\Facades;
 
 use Illuminate\Support\Facades\Facade;
-use JobMetric\Toon\Contracts\ToonManagerInterface;
 
 /**
  * @method static string encode(mixed $data)
@@ -18,6 +17,6 @@ class Toon extends Facade
      */
     protected static function getFacadeAccessor(): string
     {
-        return ToonManagerInterface::class;
+        return 'Toon';
     }
 }
