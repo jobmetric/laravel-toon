@@ -1,0 +1,15 @@
+name: Telegram Open Pull Request Notifications
+
+on:
+  pull_request_target:
+    types:
+      - opened
+      - reopened
+
+jobs:
+  notify-pr:
+    uses: jobmetric/github-notify/.github/workflows/telegram-open-pull-request-notify.yml@master
+    secrets:
+      bot_token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+      chat_id: ${{ secrets.TELEGRAM_CHAT_ID }}
+
