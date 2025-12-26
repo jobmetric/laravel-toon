@@ -1,0 +1,17 @@
+name: Telegram Issue Reply Notifications
+
+on:
+  issue_comment:
+    types:
+      - created
+
+jobs:
+  notify-reply:
+    uses: jobmetric/github-notify/.github/workflows/telegram-issue-reply-notify.yml@master
+    with:
+      date_format: jalali
+      timezone: Asia/Tehran 
+    secrets:
+      bot_token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+      chat_id: ${{ secrets.TELEGRAM_CHAT_ID }}
+
