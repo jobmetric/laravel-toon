@@ -34,7 +34,7 @@ body:
     attributes:
       label: Expected Output
       description: What output did you expect to receive?
-      placeholder: name: John, age: 30
+      placeholder: "name: John, age: 30"
     validations:
       required: true
   - type: input
@@ -42,7 +42,7 @@ body:
     attributes:
       label: Actual Output
       description: What output did you actually receive?
-      placeholder: name: John, age: 30, extra: null
+      placeholder: "name: John, age: 30, extra: null"
     validations:
       required: true
   - type: input
