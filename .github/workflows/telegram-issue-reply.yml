@@ -12,6 +12,6 @@ jobs:
       date_format: jalali
       timezone: Asia/Tehran 
     secrets:
-      bot_token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-      chat_id: ${{ secrets.TELEGRAM_CHAT_ID }}
+      bot_token: ${{ secrets.TELEGRAM_NOTIFICATION_BOT_TOKEN }}
+      chat_id: ${{ secrets.TELEGRAM_NOTIFICATION_CHAT_ID }}
 
