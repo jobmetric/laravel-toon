@@ -7,8 +7,6 @@ on:
 
 jobs:
   notify-issue:
-    environment:
-      name: telegram
     uses: jobmetric/github-notify/.github/workflows/telegram-issue-open-notify.yml@master
     with:
       date_format: jalali
